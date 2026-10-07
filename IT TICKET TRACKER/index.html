@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1459a6">
+    <title>Mini IT Support Ticket System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#main-content" aria-label="IT Support Desk home">
+          <span class="brand-mark" aria-hidden="true">IT</span>
+          <span>Support Desk</span>
+        </a>
+        <p class="header-note">Internal IT help, all in one place</p>
+      </div>
+    </header>
+
+    <main id="main-content" class="page-shell">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">IT SUPPORT</p>
+        <h1 id="page-title">Ticket tracker</h1>
+        <p>Create a request or check the progress of an existing issue.</p>
+      </section>
+
+      <section class="summary-grid" aria-label="Ticket status counts">
+        <article class="summary-card">
+          <span class="summary-label">Open</span>
+          <strong id="count-open" class="summary-count">0</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">In Progress</span>
+          <strong id="count-in-progress" class="summary-count">0</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Resolved</span>
+          <strong id="count-resolved" class="summary-count">0</strong>
+        </article>
+      </section>
+
+      <div id="storage-notice" class="notice" role="status" hidden></div>
+
+      <div class="content-grid">
+        <section class="panel form-panel" aria-labelledby="new-ticket-heading">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">HAVE AN ISSUE?</p>
+              <h2 id="new-ticket-heading">Create a ticket</h2>
+            </div>
+          </div>
+
+          <form id="ticket-form">
+            <div class="field">
+              <label for="ticket-title">Ticket title <span aria-hidden="true">*</span></label>
+              <input id="ticket-title" name="title" type="text" maxlength="120" required autocomplete="off" placeholder="e.g. Laptop won't connect to Wi-Fi">
+            </div>
+
+            <div class="field">
+              <label for="requester">Your name <span aria-hidden="true">*</span></label>
+              <input id="requester" name="requester" type="text" maxlength="80" required autocomplete="name" placeholder="e.g. Alex Morgan">
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="category">Category <span aria-hidden="true">*</span></label>
+                <select id="category" name="category" required>
+                  <option value="">Choose a category</option>
+                  <option>Hardware</option>
+                  <option>Software</option>
+                  <option>Network</option>
+                  <option>Access</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="priority">Priority <span aria-hidden="true">*</span></label>
+                <select id="priority" name="priority" required>
+                  <option value="">Choose priority</option>
+                  <option>Low</option>
+                  <option>Medium</option>
+                  <option>High</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="description">Description <span aria-hidden="true">*</span></label>
+              <textarea id="description" name="description" rows="4" maxlength="1000" required placeholder="Include any details that could help us resolve the issue."></textarea>
+            </div>
+
+            <p id="form-message" class="form-message" role="alert" aria-live="polite"></p>
+            <button class="button button-primary submit-button" type="submit">Submit ticket</button>
+          </form>
+        </section>
+
+        <section class="panel tickets-panel" aria-labelledby="tickets-heading">
+          <div class="tickets-heading">
+            <div>
+              <p class="eyebrow">YOUR QUEUE</p>
+              <h2 id="tickets-heading">Support tickets</h2>
+            </div>
+            <span id="ticket-total" class="ticket-total">0 tickets</span>
+          </div>
+
+          <div class="search-field">
+            <label class="visually-hidden" for="ticket-search">Search by ticket title or requester</label>
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="ticket-search" type="search" placeholder="Search tickets or requesters..." autocomplete="off">
+          </div>
+
+          <div class="filter-controls">
+            <div class="filter-category">
+              <label class="visually-hidden" for="category-filter">Filter by category</label>
+              <select id="category-filter">
+                <option value="">All categories</option>
+                <option>Hardware</option>
+                <option>Software</option>
+                <option>Network</option>
+                <option>Access</option>
+              </select>
+            </div>
+            <button id="clear-filters" class="clear-filters-button" type="button">Clear filters</button>
+          </div>
+
+          <p id="all-resolved-message" class="all-resolved-message" role="status" hidden>
+            Everything is resolved — great work keeping the queue clear!
+          </p>
+
+          <div id="ticket-list" class="ticket-list" aria-live="polite" aria-busy="false"></div>
+          <p id="empty-state" class="empty-state">
+            <span class="empty-icon" aria-hidden="true">✓</span>
+            <strong id="empty-title">No tickets yet</strong>
+            <span id="empty-description">New requests will appear here once submitted.</span>
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Mini IT Support Ticket System <span aria-hidden="true">·</span> Your requests are saved in this browser.</p>
+    </footer>
+  </body>
+</html>
